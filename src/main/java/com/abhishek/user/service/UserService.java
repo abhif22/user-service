@@ -6,7 +6,6 @@ import com.abhishek.user.entity.dto.UserResponse;
 import com.abhishek.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +16,6 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    @Qualifier(value = "restTemplate")
     private RestTemplate restTemplate;
 
     public User saveUser(User user) {
@@ -30,7 +28,7 @@ public class UserService {
         UserResponse ur = new UserResponse();
         User user = userRepository.findUserByUserId(userId);
         log.info("going to call department service for user", user);
-        Department dept = restTemplate.getForObject("http://localhost:9001/departments/"+user.getDepartmentId(), Department.class);
+        Department dept = restTemplate.getForObject("http://DEPARTMENT-SERVICE/departments/"+user.getDepartmentId(), Department.class);
         ur.setDepartment(dept);
         ur.setUser(user);
         return ur;
