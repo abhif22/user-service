@@ -1,0 +1,9 @@
+server:
+  port: 9002
+
+# Resttemplate configuration
+rest.template:
+  maxConnection: 400
+  maxConnectionPerHost: 100
+  socketTimeOut: 6000
+  connectionTimeOut: 5000
